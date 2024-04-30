@@ -17,7 +17,7 @@ def show_window_menu_option_choice():
     choose_option_btn_done.grid(row=3, column=0, ipadx=4, ipady=4, padx=300, pady=20, sticky="nsew")
 
 
-def close_window_menu_option_choice():
+def clear_window_menu_option_choice():
     global root, start_message_lbl, choose_option_message_lbl, options_choice_combobox, choose_option_btn_done
     # скрываем виджеты
     start_message_lbl.grid_forget()
@@ -51,7 +51,7 @@ def show_window_matrix_size_input():
     matrix_size_input_btn_done.grid(row=3, column=1, ipadx=4, ipady=20, padx=20, pady=6, sticky="nsew")
 
 
-def close_window_matrix_size_input():
+def clear_window_matrix_size_input():
     global root, matrix_size_input_message_lbl, matrix_rows_input_message_lbl, matrix_columns_input_message_lbl, \
         matrix_rows_input_entry, matrix_columns_input_entry, matrix_size_input_btn_cancel, matrix_size_input_btn_done
     # скрываем виджеты
@@ -90,7 +90,7 @@ def show_window_matrix_1_size_input():
     matrix_1_size_input_btn_done.grid(row=3, column=1, ipadx=4, ipady=20, padx=20, pady=6, sticky="nsew")
 
 
-def close_window_matrix_1_size_input():
+def clear_window_matrix_1_size_input():
     global root, matrix_1_size_input_message_lbl, matrix_1_rows_input_message_lbl, matrix_1_columns_input_message_lbl, \
         matrix_1_rows_input_entry, matrix_1_columns_input_entry, matrix_1_size_input_btn_cancel, \
         matrix_1_size_input_btn_done
@@ -130,7 +130,7 @@ def show_window_matrix_2_size_input():
     matrix_2_size_input_btn_done.grid(row=3, column=1, ipadx=4, ipady=20, padx=20, pady=6, sticky="nsew")
 
 
-def close_window_matrix_2_size_input():
+def clear_window_matrix_2_size_input():
     global root, matrix_2_size_input_message_lbl, matrix_2_rows_input_message_lbl, matrix_2_columns_input_message_lbl, \
         matrix_2_rows_input_entry, matrix_2_columns_input_entry, matrix_2_size_input_btn_cancel, \
         matrix_2_size_input_btn_done
@@ -165,7 +165,7 @@ def show_window_matrix_input():
     matrix_input_btn_done.grid(row=2, column=1, ipadx=4, ipady=4, padx=20, pady=20, sticky="nsew")
 
 
-def close_window_matrix_input():
+def clear_window_matrix_input():
     global root, matrix_input_message_lbl, matrix_input_textbox, matrix_input_btn_cancel, matrix_input_btn_done
     # скрываем виджеты
     matrix_input_message_lbl.grid_forget()
@@ -195,7 +195,7 @@ def show_window_matrix_1_input():
     matrix_1_input_btn_done.grid(row=2, column=1, ipadx=4, ipady=4, padx=20, pady=20, sticky="nsew")
 
 
-def close_window_matrix_1_input():
+def clear_window_matrix_1_input():
     global root, matrix_1_input_message_lbl, matrix_1_input_textbox, matrix_1_input_btn_cancel, matrix_1_input_btn_done
     # скрываем виджеты
     matrix_1_input_message_lbl.grid_forget()
@@ -225,7 +225,7 @@ def show_window_matrix_2_input():
     matrix_2_input_btn_done.grid(row=2, column=1, ipadx=4, ipady=4, padx=20, pady=20, sticky="nsew")
 
 
-def close_window_matrix_2_input():
+def clear_window_matrix_2_input():
     global root, matrix_2_input_message_lbl, matrix_2_input_textbox, matrix_2_input_btn_cancel, matrix_2_input_btn_done
     # скрываем виджеты
     matrix_2_input_message_lbl.grid_forget()
@@ -255,7 +255,7 @@ def show_window_number_input():
     number_input_btn_done.grid(row=2, column=1, ipadx=4, ipady=4, padx=20, pady=20, sticky="nsew")
 
 
-def close_window_number_input():
+def clear_window_number_input():
     global root, number_input_message_lbl, number_input_entry, number_input_btn_cancel, number_input_btn_done
     # скрываем виджеты
     number_input_message_lbl.grid_forget()
@@ -286,7 +286,7 @@ def show_window_matrix_result_output():
     matrix_result_output_btn_done.grid(row=2, column=1, ipadx=4, ipady=4, padx=20, pady=20, sticky="nsew")
 
 
-def close_window_matrix_result_output():
+def clear_window_matrix_result_output():
     global root, matrix_result_output_message_lbl, matrix_result_output_textbox, matrix_result_output_btn_cancel, \
         matrix_result_output_btn_done
     # скрываем виджеты
@@ -318,7 +318,7 @@ def show_window_matrix_check_symmetry_output():
     matrix_check_symmetry_output_btn_done.grid(row=2, column=1, ipadx=4, ipady=4, padx=20, pady=20, sticky="nsew")
 
 
-def close_window_matrix_check_symmetry_output():
+def clear_window_matrix_check_symmetry_output():
     global root, matrix_check_symmetry_output_message_lbl, matrix_check_symmetry_output_entry, \
         matrix_check_symmetry_output_btn_cancel, matrix_check_symmetry_output_btn_done
     # скрываем виджеты
@@ -338,7 +338,7 @@ def close_window_matrix_check_symmetry_output():
 def handle_pressing_choose_option_btn_done():
     global options_choice_combobox, flag_option
     flag_option = options_choice_combobox.get()
-    close_window_menu_option_choice()
+    clear_window_menu_option_choice()
     if flag_option in ("Умножение матрицы на число", "Транспонирование матрицы",
                        "Проверка матрицы на симметричность"):
         show_window_matrix_size_input()
@@ -347,38 +347,38 @@ def handle_pressing_choose_option_btn_done():
 
 
 def handle_pressing_matrix_size_input_btn_done():
-    close_window_matrix_size_input()
+    clear_window_matrix_size_input()
     show_window_matrix_input()
 
 
 def handle_pressing_matrix_size_input_btn_cancel():
-    close_window_matrix_size_input()
+    clear_window_matrix_size_input()
     show_window_menu_option_choice()
 
 
 def handle_pressing_matrix_1_size_input_btn_done():
-    close_window_matrix_1_size_input()
+    clear_window_matrix_1_size_input()
     show_window_matrix_1_input()
 
 
 def handle_pressing_matrix_1_size_input_btn_cancel():
-    close_window_matrix_1_size_input()
+    clear_window_matrix_1_size_input()
     show_window_menu_option_choice()
 
 
 def handle_pressing_matrix_2_size_input_btn_done():
-    close_window_matrix_2_size_input()
+    clear_window_matrix_2_size_input()
     show_window_matrix_2_input()
 
 
 def handle_pressing_matrix_2_size_input_btn_cancel():
-    close_window_matrix_2_size_input()
+    clear_window_matrix_2_size_input()
     show_window_matrix_1_input()
 
 
 def handle_pressing_matrix_input_btn_done():
     global flag_option
-    close_window_matrix_input()
+    clear_window_matrix_input()
     if flag_option == "Умножение матрицы на число":
         show_window_number_input()
     elif flag_option == "Транспонирование матрицы":
@@ -388,48 +388,48 @@ def handle_pressing_matrix_input_btn_done():
 
 
 def handle_pressing_matrix_input_btn_cancel():
-    close_window_matrix_input()
+    clear_window_matrix_input()
     show_window_matrix_size_input()
 
 
 def handle_pressing_matrix_1_input_btn_done():
-    close_window_matrix_1_input()
+    clear_window_matrix_1_input()
     show_window_matrix_2_size_input()
 
 
 def handle_pressing_matrix_1_input_btn_cancel():
-    close_window_matrix_1_input()
+    clear_window_matrix_1_input()
     show_window_matrix_1_size_input()
 
 
 def handle_pressing_matrix_2_input_btn_done():
-    close_window_matrix_2_input()
+    clear_window_matrix_2_input()
     show_window_matrix_result_output()
 
 
 def handle_pressing_matrix_2_input_btn_cancel():
-    close_window_matrix_2_input()
+    clear_window_matrix_2_input()
     show_window_matrix_2_size_input()
 
 
 def handle_pressing_number_input_btn_done():
-    close_window_number_input()
+    clear_window_number_input()
     show_window_matrix_result_output()
 
 
 def handle_pressing_number_input_btn_cancel():
-    close_window_number_input()
+    clear_window_number_input()
     show_window_matrix_input()
 
 
 def handle_pressing_matrix_result_output_btn_done():
-    close_window_matrix_result_output()
+    clear_window_matrix_result_output()
     show_window_menu_option_choice()
 
 
 def handle_pressing_matrix_result_output_btn_cancel():
     global flag_option
-    close_window_matrix_result_output()
+    clear_window_matrix_result_output()
     if flag_option == "Умножение матрицы на число":
         show_window_number_input()
     elif flag_option == "Транспонирование матрицы":
@@ -439,12 +439,12 @@ def handle_pressing_matrix_result_output_btn_cancel():
 
 
 def handle_pressing_matrix_check_symmetry_output_btn_done():
-    close_window_matrix_check_symmetry_output()
+    clear_window_matrix_check_symmetry_output()
     show_window_menu_option_choice()
 
 
 def handle_pressing_matrix_check_symmetry_output_btn_cancel():
-    close_window_matrix_check_symmetry_output()
+    clear_window_matrix_check_symmetry_output()
     show_window_matrix_input()
 
 
@@ -591,17 +591,13 @@ matrix_check_symmetry_output_btn_cancel.configure(text="Назад", font=my_fon
 
 # глобальные переменные, в которых будем хранить данные (изначально присвоим None, чтобы создать переменные)
 
-flag_option = None  # хранит название опции, которую выбрали; нужен, чтобы понять, как переключаться между окнами
+flag_option = None  # хранит название опции, которую выбрали; нужна, чтобы понять, как переключаться между окнами
 # например, мы в окне "matrix_1_input", понятно, что при нажатии на кнопку matrix_1_input_btn_done мы однозначно
 # перейдём в окно "matrix_2_size_input", а при нажатии на кнопку matrix_1_input_btn_cancel мы однозначно перейдём в окно
 # "matrix_1_size_input";
-# теперь представим, что мы в окне "menu_option_choice", при нажатии на кнопку choose_option_btn_done мы можем попасть
-# либо в окно "matrix_size_input", если выбрали первые три опции, или в окно "matrix_1_size_input", если выбрали
-# остальные 3 опции, здесь нужна переменная-флаг, которая хранит, какую опцию мы выбрали и в зависимости от неё мы
-# отрисовываем нужное окно
-# или мы в окне "matrix_result_output", при нажатии на кнопку matrix_result_output_btn_cancel мы попадём в окно
-# "number_input", если выбрана первая опция, в окно "matrix_input", если вторая опция, в окно "matrix_2_input", если
-# последние три опции (если выбрана треться опция проверки на симметричность, мы не окажемся в этом окне)
+# теперь представим, что мы в окне "matrix_input", при нажатии на кнопку matrix_input_byn_done мы перейдём в одно из
+# трёх окон: "number_input", "matrix_result_output", "matrix_check_symmetry_output". Выбор окна засит от выбора опции
+# в самом начале. Поэтому нужна переменная-флаг, которая будет хранить выбор опции.
 
 number_data = None  # сохраняем данные о введенном от пользователя из поля Entry числе
 matrix_rows_data, matrix_columns_data, matrix_data = None, None, None  # сохраняем данные о матрице,
