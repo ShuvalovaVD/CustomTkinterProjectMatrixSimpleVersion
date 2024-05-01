@@ -1,4 +1,5 @@
 import customtkinter as ctk  # подключаем модуль customtkinter
+import logic
 
 # функции, которые отрисовывают и стирают окна
 
@@ -344,91 +345,171 @@ def handle_pressing_choose_option_btn_done():
         show_window_matrix_size_input()
     else:
         show_window_matrix_1_size_input()
+    options_choice_combobox.set("Умножение матрицы на число")  # снова устанавливаем значение по умолчанию
 
 
 def handle_pressing_matrix_size_input_btn_done():
+    global matrix_rows_data, matrix_columns_data, matrix_rows_input_entry, matrix_columns_input_entry
+    matrix_rows_data = matrix_rows_input_entry.get()
+    matrix_rows_input_entry.delete(0, "end")
+    matrix_columns_data = matrix_columns_input_entry.get()
+    matrix_columns_input_entry.delete(0, "end")
     clear_window_matrix_size_input()
     show_window_matrix_input()
 
 
 def handle_pressing_matrix_size_input_btn_cancel():
+    global matrix_rows_input_entry, matrix_columns_input_entry
+    matrix_rows_input_entry.delete(0, "end")
+    matrix_columns_input_entry.delete(0, "end")
     clear_window_matrix_size_input()
     show_window_menu_option_choice()
 
 
 def handle_pressing_matrix_1_size_input_btn_done():
+    global matrix_1_rows_data, matrix_1_columns_data, matrix_1_rows_input_entry, matrix_1_columns_input_entry
+    matrix_1_rows_data = matrix_1_rows_input_entry.get()
+    matrix_1_rows_input_entry.delete(0, "end")
+    matrix_1_columns_data = matrix_1_columns_input_entry.get()
+    matrix_1_columns_input_entry.delete(0, "end")
     clear_window_matrix_1_size_input()
     show_window_matrix_1_input()
 
 
 def handle_pressing_matrix_1_size_input_btn_cancel():
+    global matrix_1_rows_input_entry, matrix_1_columns_input_entry
+    matrix_1_rows_input_entry.delete(0, "end")
+    matrix_1_columns_input_entry.delete(0, "end")
     clear_window_matrix_1_size_input()
     show_window_menu_option_choice()
 
 
 def handle_pressing_matrix_2_size_input_btn_done():
+    global matrix_2_rows_data, matrix_2_columns_data, matrix_2_rows_input_entry, matrix_2_columns_input_entry
+    matrix_2_rows_data = matrix_2_rows_input_entry.get()
+    matrix_2_rows_input_entry.delete(0, "end")
+    matrix_2_columns_data = matrix_2_columns_input_entry.get()
+    matrix_2_columns_input_entry.delete(0, "end")
     clear_window_matrix_2_size_input()
     show_window_matrix_2_input()
 
 
 def handle_pressing_matrix_2_size_input_btn_cancel():
+    global matrix_2_rows_input_entry, matrix_2_columns_input_entry
+    matrix_2_rows_input_entry.delete(0, "end")
+    matrix_2_columns_input_entry.delete(0, "end")
     clear_window_matrix_2_size_input()
     show_window_matrix_1_input()
 
 
 def handle_pressing_matrix_input_btn_done():
-    global flag_option
+    global flag_option, matrix_data, matrix_input_textbox, matrix_rows_data, matrix_columns_data, matrix_data, \
+        matrix_result_output_textbox, matrix_check_symmetry_output_entry
+    matrix_data = matrix_input_textbox.get("1.0", "end")
+    matrix_input_textbox.delete("1.0", "end")
     clear_window_matrix_input()
     if flag_option == "Умножение матрицы на число":
         show_window_number_input()
     elif flag_option == "Транспонирование матрицы":
+        matrix_result = logic.transpone_matrix(matrix_rows_data, matrix_columns_data, matrix_data)
+        matrix_result_output_textbox.configure(state="normal")
+        matrix_result_output_textbox.insert("1.0", matrix_result)
+        matrix_result_output_textbox.configure(state="disabled")
         show_window_matrix_result_output()
     else:  # flag_option == "Проверка матрицы на симметричность"
+        matrix_check_symmetry_output_entry.configure(state="normal")
+        if logic.check_symmetry_of_matrix(matrix_rows_data, matrix_columns_data, matrix_data):
+            matrix_check_symmetry_output_entry.insert(0, "Матрица симметрична")
+        else:
+            matrix_check_symmetry_output_entry.insert(0, "Матрица несимметрична")
+        matrix_check_symmetry_output_entry.configure(state="readonly")
         show_window_matrix_check_symmetry_output()
 
 
 def handle_pressing_matrix_input_btn_cancel():
+    global matrix_input_textbox
+    matrix_input_textbox.delete("1.0", "end")
     clear_window_matrix_input()
     show_window_matrix_size_input()
 
 
 def handle_pressing_matrix_1_input_btn_done():
+    global matrix_1_data, matrix_1_input_textbox
+    matrix_1_data = matrix_1_input_textbox.get("1.0", "end")
+    matrix_1_input_textbox.delete("1.0", "end")
     clear_window_matrix_1_input()
     show_window_matrix_2_size_input()
 
 
 def handle_pressing_matrix_1_input_btn_cancel():
+    global matrix_1_input_textbox
+    matrix_1_input_textbox.delete("1.0", "end")
     clear_window_matrix_1_input()
     show_window_matrix_1_size_input()
 
 
 def handle_pressing_matrix_2_input_btn_done():
+    global flag_option, matrix_2_input_textbox, matrix_result_output_textbox, matrix_1_rows_data, \
+        matrix_1_columns_data, matrix_1_data, matrix_2_rows_data, matrix_2_columns_data, matrix_2_data
+    matrix_2_data = matrix_2_input_textbox.get("1.0", "end")
+    matrix_2_input_textbox.delete("1.0", "end")
+    if flag_option == "Сложение двух матриц":
+        matrix_result = logic.add_two_matrix(matrix_1_rows_data, matrix_1_columns_data, matrix_1_data,
+                                             matrix_2_rows_data, matrix_2_columns_data, matrix_2_data)
+    elif flag_option == "Вычитание двух матриц":
+        matrix_result = logic.subtract_two_matrix(matrix_1_rows_data, matrix_1_columns_data, matrix_1_data,
+                                             matrix_2_rows_data, matrix_2_columns_data, matrix_2_data)
+    else:  # flag_option == "Умножение двух матриц"
+        matrix_result = logic.multiply_two_matrix(matrix_1_rows_data, matrix_1_columns_data, matrix_1_data,
+                                             matrix_2_rows_data, matrix_2_columns_data, matrix_2_data)
+    matrix_result_output_textbox.configure(state="normal")
+    matrix_result_output_textbox.insert("1.0", matrix_result)
+    matrix_result_output_textbox.configure(state="disabled")
     clear_window_matrix_2_input()
     show_window_matrix_result_output()
 
 
 def handle_pressing_matrix_2_input_btn_cancel():
+    global matrix_2_input_textbox
+    matrix_2_input_textbox.delete("1.0", "end")
     clear_window_matrix_2_input()
     show_window_matrix_2_size_input()
 
 
 def handle_pressing_number_input_btn_done():
+    global number_data, number_input_entry, matrix_result_output_textbox, matrix_rows_data, matrix_columns_data, \
+        matrix_data
+    number_data = number_input_entry.get()
+    number_input_entry.delete(0, "end")
+    matrix_result = logic.multiply_matrix_by_number(matrix_rows_data, matrix_columns_data, matrix_data, number_data)
+    matrix_result_output_textbox.configure(state="normal")
+    matrix_result_output_textbox.insert("1.0", matrix_result)
+    matrix_result_output_textbox.configure(state="disabled")
     clear_window_number_input()
     show_window_matrix_result_output()
 
 
 def handle_pressing_number_input_btn_cancel():
+    global number_input_entry
+    number_input_entry.delete(0, "end")
     clear_window_number_input()
     show_window_matrix_input()
 
 
 def handle_pressing_matrix_result_output_btn_done():
+    global matrix_result_output_textbox
+    matrix_result_output_textbox.configure(state="normal")
+    matrix_result_output_textbox.delete("1.0", "end")
+    matrix_result_output_textbox.configure(state="disabled")
     clear_window_matrix_result_output()
     show_window_menu_option_choice()
 
 
 def handle_pressing_matrix_result_output_btn_cancel():
-    global flag_option
+    global flag_option, matrix_result_output_textbox
+    matrix_result_output_textbox.configure(state="normal")
+    matrix_result_output_textbox.delete("1.0", "end")
+    matrix_result_output_textbox.configure(state="disabled")
     clear_window_matrix_result_output()
     if flag_option == "Умножение матрицы на число":
         show_window_number_input()
@@ -439,11 +520,19 @@ def handle_pressing_matrix_result_output_btn_cancel():
 
 
 def handle_pressing_matrix_check_symmetry_output_btn_done():
+    global matrix_check_symmetry_output_entry
+    matrix_check_symmetry_output_entry.configure(state="normal")
+    matrix_check_symmetry_output_entry.delete(0, "end")
+    matrix_check_symmetry_output_entry.configure(state="readonly")
     clear_window_matrix_check_symmetry_output()
     show_window_menu_option_choice()
 
 
 def handle_pressing_matrix_check_symmetry_output_btn_cancel():
+    global matrix_check_symmetry_output_entry
+    matrix_check_symmetry_output_entry.configure(state="normal")
+    matrix_check_symmetry_output_entry.delete(0, "end")
+    matrix_check_symmetry_output_entry.configure(state="readonly")
     clear_window_matrix_check_symmetry_output()
     show_window_matrix_input()
 
@@ -569,7 +658,7 @@ number_input_btn_cancel.configure(text="Назад", font=my_font, command=handl
 matrix_result_output_message_lbl = ctk.CTkLabel(master=root)
 matrix_result_output_message_lbl.configure(text="Итоговая матрица:", font=my_font)
 matrix_result_output_textbox = ctk.CTkTextbox(master=root)
-matrix_result_output_textbox.configure(font=my_font)
+matrix_result_output_textbox.configure(font=my_font, state="disabled")
 matrix_result_output_btn_done = ctk.CTkButton(master=root)
 matrix_result_output_btn_done.configure(text="Готово", font=my_font,
                                         command=handle_pressing_matrix_result_output_btn_done)
@@ -581,7 +670,7 @@ matrix_result_output_btn_cancel.configure(text="Назад", font=my_font,
 matrix_check_symmetry_output_message_lbl = ctk.CTkLabel(master=root)
 matrix_check_symmetry_output_message_lbl.configure(text="Проверка на симметричность:", font=my_font)
 matrix_check_symmetry_output_entry = ctk.CTkEntry(master=root)
-matrix_check_symmetry_output_entry.configure(font=my_font, justify="center")
+matrix_check_symmetry_output_entry.configure(font=my_font, justify="center", state="readonly")
 matrix_check_symmetry_output_btn_done = ctk.CTkButton(master=root)
 matrix_check_symmetry_output_btn_done.configure(text="Готово", font=my_font,
                                                 command=handle_pressing_matrix_check_symmetry_output_btn_done)
